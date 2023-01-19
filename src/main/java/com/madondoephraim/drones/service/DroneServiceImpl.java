@@ -1,4 +1,4 @@
-package com.madondoephraim.drones.service.drones;
+package com.madondoephraim.drones.service;
 
 import com.madondoephraim.drones.entities.Drone;
 import com.madondoephraim.drones.entities.State;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class DroneServiceImpl implements DroneService {
-    private DronesRepository dronesRepository;
+    private final DronesRepository dronesRepository;
     @Autowired
     public DroneServiceImpl(DronesRepository dronesRepository) {
         this.dronesRepository = dronesRepository;

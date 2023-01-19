@@ -1,8 +1,8 @@
 package com.madondoephraim.drones.api;
 
-import com.madondoephraim.drones.data.response.DroneBattery;
+import com.madondoephraim.drones.commons.DroneBattery;
 import com.madondoephraim.drones.entities.Drone;
-import com.madondoephraim.drones.service.drones.DroneService;
+import com.madondoephraim.drones.service.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  *
  * @author Ephraim Madodno
- * Drones Rest API Controller - /drones
+ * Drones Rest API Controller - /api/drones
  *
  */
 @RestController
 @RequestMapping(path = "/api/drones")
 public class DronesController {
 
-    private DroneService droneService;
+    private final DroneService droneService;
     @Autowired
     public DronesController(DroneService droneService) {
         this.droneService = droneService;
@@ -33,7 +33,7 @@ public class DronesController {
 
         Drone dto = droneService.getDrone(serialNumber);
         if(dto!=null) {
-            return ResponseEntity.ok(DroneBattery.from(dto));
+            return ResponseEntity.ok(new DroneBattery(dto));
         }
         else
             return ResponseEntity.notFound().build();

@@ -1,4 +1,4 @@
-package com.madondoephraim.drones.data.response;
+package com.madondoephraim.drones.commons;
 
 import com.madondoephraim.drones.entities.Drone;
 import com.madondoephraim.drones.entities.Model;
@@ -11,8 +11,10 @@ public class DroneBattery {
     private String serialNumber;
     private Model model;
     private int batteryLife;
-    public static DroneBattery from(Drone d) {
-        return new DroneBattery(d.getSerialNumber(), d.getDroneModel(), d.getBatteryLife());
+    public DroneBattery(Drone d) {
+        this.serialNumber = d.getSerialNumber();
+        this.model = d.getDroneModel();
+        this.batteryLife = d.getBatteryLife();
     }
 
 }
