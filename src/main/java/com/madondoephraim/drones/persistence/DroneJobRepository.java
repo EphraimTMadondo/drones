@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DroneJobRepository extends CrudRepository<DroneJob,Long> {
-
-    List<DroneJob> findByDroneIdAndStateIn(String droneId, List<State> states);
+    List<DroneJob> findBySerialNumberAndStateIn(String droneId, List<State> states);
 }

@@ -16,21 +16,20 @@ import java.util.List;
 @Service
 public class DroneJobsServiceImpl implements DroneJobsService {
     private static final String ERROR = "error";
-    private final DroneJobRepository jobsRepo;
-
-    private final DronesRepository dronesRepo;
-    private final MedicationService medService;
+    private DroneJobRepository jobsRepo;
+    @Autowired
+    private DronesRepository dronesRepo;
+    @Autowired
+    private MedicationService medService;
 
     @Autowired
-    public DroneJobsServiceImpl(DroneJobRepository jobsRepo, DronesRepository dronesRepo, MedicationService medService) {
-        this.jobsRepo = jobsRepo;
-        this.dronesRepo = dronesRepo;
+    public DroneJobsServiceImpl(MedicationService medService) {
         this.medService = medService;
     }
 
     @Override
     public GenericReponse loadDrone(DroneJob droneJob) {
-        Drone drone = dronesRepo.findBySerialNumber(droneJob.getDroneId());
+        Drone drone = dronesRepo.findBySerialNumber(droneJob.getSerialNumber());
 
         if(drone == null)
             return parseResponse("Drone does not exist. Check the serial number",ERROR);
@@ -85,7 +84,7 @@ public class DroneJobsServiceImpl implements DroneJobsService {
     @Override
     public List<DroneJob> getDroneJob(String serialnumber) {
         return jobsRepo
-                .findByDroneIdAndStateIn(serialnumber, Arrays.asList(State.LOADING, State.LOADED));
+                .findBySerialNumberAndStateIn(serialnumber, Arrays.asList(State.LOADING, State.LOADED));
 
     }
 }

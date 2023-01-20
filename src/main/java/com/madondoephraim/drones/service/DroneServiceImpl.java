@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class DroneServiceImpl implements DroneService {
-    private final DronesRepository dronesRepository;
+    private DronesRepository dronesRepository;
     @Autowired
     public DroneServiceImpl(DronesRepository dronesRepository) {
         this.dronesRepository = dronesRepository;

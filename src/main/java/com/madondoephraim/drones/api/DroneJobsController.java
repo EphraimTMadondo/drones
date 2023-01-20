@@ -1,8 +1,15 @@
 package com.madondoephraim.drones.api;
 
+import com.madondoephraim.drones.commons.DroneActivity;
 import com.madondoephraim.drones.commons.GenericReponse;
 import com.madondoephraim.drones.entities.DroneJob;
 import com.madondoephraim.drones.service.DroneJobsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +35,27 @@ public class DroneJobsController {
 
 
     @PostMapping(value="/load",consumes=APPLICATION_JSON_VALUE)
-    public ResponseEntity<GenericReponse> loadDrone(@RequestBody DroneJob dto){
+    @Operation(summary = "Load drone with medication")
+    @ApiResponse(responseCode = "201", description = "Drone loaded",
+            content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericReponse.class))})
+    public ResponseEntity<GenericReponse> loadDrone(@Valid @RequestBody DroneJob dto){
         GenericReponse res = jobService.loadDrone(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
-
-
     @GetMapping("/check/{serialNumber}")
-    public List<DroneJob> findAvailableDroneJob(@PathVariable("serialNumber")String serialNumber){
-        return jobService.getDroneJob(serialNumber);
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Found the drone activity",
+            content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneActivity.class))}),
+            @ApiResponse(responseCode = "404", description = "Drone not found", content = @Content)})
+    public ResponseEntity<DroneActivity> findAvailableDroneJob(@Valid @PathVariable("serialNumber")String serialNumber){
+        List<DroneJob> jobs =  jobService.getDroneJob(serialNumber);
+        if(!jobs.isEmpty()) {
+            DroneActivity droneActivity = DroneActivity.builder()
+                    .total(jobs.size())
+                    .jobs(jobs).build();
+            return ResponseEntity.ok(droneActivity);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
-
-
-
 }

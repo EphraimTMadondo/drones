@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class MedicationServiceImpl implements MedicationService{
-	private final MedicationRepository medRepo;
+	private MedicationRepository medRepo;
 	@Autowired
 	public MedicationServiceImpl(MedicationRepository medRepo) {
 		this.medRepo = medRepo;
