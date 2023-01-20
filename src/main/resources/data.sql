@@ -1,5 +1,4 @@
 -- noinspection SqlDialectInspectionForFile
-
 -- noinspection SqlNoDataSourceInspectionForFile
 
 INSERT INTO musala_drones(serial_number, drone_model, maximum_weight, battery_capacity, drone_state, loaded_weight) VALUES

@@ -16,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -57,11 +55,8 @@ public class DronesController {
     @ApiResponse(responseCode = "201", description = "Drones found",
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DronesSummary.class))})
     public ResponseEntity<DronesSummary> findAll() {
-        List<Drone> drones =  droneService.getAll();
-        if(!drones.isEmpty()) {
-            DronesSummary dronesSummary = DronesSummary.builder()
-                    .total(drones.size())
-                    .drones(drones).build();
+        DronesSummary dronesSummary =  droneService.getAll();
+        if(dronesSummary != null) {
             return ResponseEntity.ok(dronesSummary);
         } else {
             return ResponseEntity.notFound().build();
@@ -73,11 +68,8 @@ public class DronesController {
     @ApiResponse(responseCode = "201", description = "Drones found",
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DronesSummary.class))})
     public ResponseEntity<DronesSummary> findAvailable() {
-        List<Drone> drones =  droneService.getAvailable();
-        if(!drones.isEmpty()) {
-            DronesSummary dronesSummary = DronesSummary.builder()
-                    .total(drones.size())
-                    .drones(drones).build();
+        DronesSummary dronesSummary =  droneService.getAvailable();
+        if(dronesSummary != null) {
             return ResponseEntity.ok(dronesSummary);
         } else {
             return ResponseEntity.notFound().build();

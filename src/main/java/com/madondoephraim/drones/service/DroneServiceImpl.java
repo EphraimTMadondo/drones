@@ -1,5 +1,6 @@
 package com.madondoephraim.drones.service;
 
+import com.madondoephraim.drones.commons.DronesSummary;
 import com.madondoephraim.drones.entities.Drone;
 import com.madondoephraim.drones.entities.State;
 import com.madondoephraim.drones.persistence.DronesRepository;
@@ -27,12 +28,24 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public List<Drone> getAll() {
-        return dronesRepository.findAll();
+    public DronesSummary getAll() {
+        List<Drone> drones =  dronesRepository.findAll();
+        if(!drones.isEmpty()) {
+            return DronesSummary.builder()
+                    .total(drones.size())
+                    .drones(drones).build();
+        }
+        return null;
     }
 
     @Override
-    public List<Drone> getAvailable() {
-        return dronesRepository.findByDroneState(State.IDLE);
+    public DronesSummary getAvailable() {
+        List<Drone> drones =  dronesRepository.findByDroneState(State.IDLE);
+        if(!drones.isEmpty()) {
+            return DronesSummary.builder()
+                    .total(drones.size())
+                    .drones(drones).build();
+        }
+        return null;
     }
 }

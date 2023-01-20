@@ -16,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -50,11 +48,8 @@ public class DroneJobsController {
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneActivity.class))}),
             @ApiResponse(responseCode = "404", description = "Drone not found", content = @Content)})
     public ResponseEntity<DroneActivity> findAvailableDroneJob(@Valid @PathVariable("serialNumber")String serialNumber){
-        List<DroneJob> jobs =  jobService.getDroneJob(serialNumber);
-        if(!jobs.isEmpty()) {
-            DroneActivity droneActivity = DroneActivity.builder()
-                    .total(jobs.size())
-                    .jobs(jobs).build();
+        DroneActivity droneActivity =  jobService.getDroneJob(serialNumber);
+        if(droneActivity != null) {
             return ResponseEntity.ok(droneActivity);
         } else {
             return ResponseEntity.notFound().build();

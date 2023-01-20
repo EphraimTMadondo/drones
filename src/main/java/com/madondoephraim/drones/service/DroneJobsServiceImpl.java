@@ -1,5 +1,6 @@
 package com.madondoephraim.drones.service;
 
+import com.madondoephraim.drones.commons.DroneActivity;
 import com.madondoephraim.drones.commons.GenericReponse;
 import com.madondoephraim.drones.entities.Drone;
 import com.madondoephraim.drones.entities.DroneJob;
@@ -72,19 +73,22 @@ public class DroneJobsServiceImpl implements DroneJobsService {
         resp.setData(res);
         resp.setStatus(status);
         return resp;
-
     }
 
     /**
      * This function will load the activities of a given drone using serial number if the drone is in
      * LOADING OR LOADED state.
-     *
      */
 
     @Override
-    public List<DroneJob> getDroneJob(String serialnumber) {
-        return jobsRepo
+    public DroneActivity getDroneJob(String serialnumber) {
+        List<DroneJob> jobs = jobsRepo
                 .findBySerialNumberAndStateIn(serialnumber, Arrays.asList(State.LOADING, State.LOADED));
-
+        if (!jobs.isEmpty()) {
+            return DroneActivity.builder()
+                    .total(jobs.size())
+                    .jobs(jobs).build();
+        }
+        return null;
     }
 }
