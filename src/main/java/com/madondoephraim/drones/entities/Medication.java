@@ -1,5 +1,6 @@
 package com.madondoephraim.drones.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -20,7 +21,7 @@ import lombok.Data;
 public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonProperty(required = false)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "medication_name")

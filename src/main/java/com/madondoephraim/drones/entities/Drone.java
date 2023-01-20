@@ -30,7 +30,7 @@ public class Drone {
     private Model droneModel;
 
     @Column(name="maximum_weight")
-    @DecimalMax(value = "500", message =" Drone cannot carry more than {value} grams")
+    @DecimalMax(value = "1000", message =" No Drone can carry more than {value} grams")
     private Double maximum_weight;
 
     @Column(name="battery_capacity")

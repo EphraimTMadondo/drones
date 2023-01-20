@@ -21,7 +21,6 @@ public class MedicationServiceImpl implements MedicationService{
 		List<Medication> result = new ArrayList<>();
 		medRepo.saveAll(medications).iterator().forEachRemaining(result::add);
 		return result;
-
 	}
 
 }

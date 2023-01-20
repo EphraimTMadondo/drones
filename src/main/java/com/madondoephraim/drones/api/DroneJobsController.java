@@ -2,7 +2,7 @@ package com.madondoephraim.drones.api;
 
 import com.madondoephraim.drones.commons.DroneActivity;
 import com.madondoephraim.drones.commons.GenericReponse;
-import com.madondoephraim.drones.entities.DroneJob;
+import com.madondoephraim.drones.commons.LoadDrone;
 import com.madondoephraim.drones.service.DroneJobsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,16 +38,28 @@ public class DroneJobsController {
     @Operation(summary = "Load drone with medication")
     @ApiResponse(responseCode = "201", description = "Drone loaded",
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericReponse.class))})
-    public ResponseEntity<GenericReponse> loadDrone(@Valid @RequestBody DroneJob dto){
+    public ResponseEntity<GenericReponse> loadDrone(@Valid @RequestBody LoadDrone dto){
         GenericReponse res = jobService.loadDrone(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
+    @GetMapping("/check")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Found the drone activity",
+            content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneActivity.class))}),
+            @ApiResponse(responseCode = "404", description = "No activities not found", content = @Content)})
+    public ResponseEntity<DroneActivity> checkActivity(){
+        DroneActivity droneActivity =  jobService.getAll();
+        if(droneActivity != null) {
+            return ResponseEntity.ok(droneActivity);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/check/{serialNumber}")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Found the drone activity",
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = DroneActivity.class))}),
             @ApiResponse(responseCode = "404", description = "Drone not found", content = @Content)})
-    public ResponseEntity<DroneActivity> findAvailableDroneJob(@Valid @PathVariable("serialNumber")String serialNumber){
+    public ResponseEntity<DroneActivity> findDroneJob(@Valid @PathVariable("serialNumber")String serialNumber){
         DroneActivity droneActivity =  jobService.getDroneJob(serialNumber);
         if(droneActivity != null) {
             return ResponseEntity.ok(droneActivity);

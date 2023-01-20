@@ -2,6 +2,7 @@ package com.madondoephraim.drones.service;
 
 import com.madondoephraim.drones.commons.DroneActivity;
 import com.madondoephraim.drones.commons.GenericReponse;
+import com.madondoephraim.drones.commons.LoadDrone;
 import com.madondoephraim.drones.entities.Drone;
 import com.madondoephraim.drones.entities.DroneJob;
 import com.madondoephraim.drones.entities.Medication;
@@ -10,6 +11,7 @@ import com.madondoephraim.drones.persistence.DroneJobRepository;
 import com.madondoephraim.drones.persistence.DronesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service
 public class DroneJobsServiceImpl implements DroneJobsService {
     private static final String ERROR = "error";
+    @Autowired
     private DroneJobRepository jobsRepo;
     @Autowired
     private DronesRepository dronesRepo;
@@ -29,42 +32,44 @@ public class DroneJobsServiceImpl implements DroneJobsService {
     }
 
     @Override
-    public GenericReponse loadDrone(DroneJob droneJob) {
-        Drone drone = dronesRepo.findBySerialNumber(droneJob.getSerialNumber());
+    @Transactional
+    public GenericReponse loadDrone(LoadDrone loadDrone) {
+        Drone drone = dronesRepo.findBySerialNumber(loadDrone.getSerialNumber());
 
         if(drone == null)
             return parseResponse("Drone does not exist. Check the serial number",ERROR);
 
-        List<Medication> meds = medService.createMedication(droneJob.getPackages());
-
-
-        DroneJob activity = new DroneJob(drone);
-
-        //Perform checks
-        if(drone.getDroneState() != State.LOADING)
+        if(!Arrays.asList(State.LOADING, State.IDLE).contains(drone.getDroneState()))
             return parseResponse("Drone is fully loaded and no longer available, please try another drone",ERROR);
 
-        if(activity.getWeightLoaded()>drone.getMaximum_weight())
+        if(loadDrone.getTotalWeight()>drone.getMaximum_weight())
             return parseResponse("The weight loaded is heavier than the drone capacity",ERROR);
 
-        double availableWeight = drone.getLoadedWeight() - drone.getMaximum_weight();
+        double availableWeight =  drone.getMaximum_weight() - drone.getLoadedWeight();
 
-        if(activity.getWeightLoaded()>availableWeight)
+        if(loadDrone.getTotalWeight()>availableWeight)
             return parseResponse("Weight loaded is greater than available space",ERROR);
 
-        double totalWeight = drone.getMaximum_weight() + activity.getWeightLoaded();
+        double totalWeight = drone.getLoadedWeight() + loadDrone.getTotalWeight();
 
         //Load drone and update status
+        List<Medication> meds = medService.createMedication(loadDrone.getMedications());
+
+        DroneJob droneJob = new DroneJob();
+        droneJob.setSerialNumber(drone.getSerialNumber());
+        droneJob.setWeightLoaded(loadDrone.getTotalWeight());
+        droneJob.setAddress(loadDrone.getDeliveryAddress());
+        droneJob.setPackages(meds);
+        droneJob.setQuantity(loadDrone.getQuantity());
 
         drone.setLoadedWeight(totalWeight);
         if(drone.getMaximum_weight() == totalWeight) {
             drone.setDroneState(State.LOADED);
+        } else {
+            drone.setDroneState(State.LOADING);
         }
-        activity.setState(drone.getDroneState());
-        activity.setPackages(meds);
-        jobsRepo.save(activity);
+        jobsRepo.save(droneJob);
         dronesRepo.save(drone);
-
         return parseResponse(drone.getSerialNumber(),"OK");
     }
 
@@ -83,7 +88,19 @@ public class DroneJobsServiceImpl implements DroneJobsService {
     @Override
     public DroneActivity getDroneJob(String serialnumber) {
         List<DroneJob> jobs = jobsRepo
-                .findBySerialNumberAndStateIn(serialnumber, Arrays.asList(State.LOADING, State.LOADED));
+                .findBySerialNumber(serialnumber);
+        if (!jobs.isEmpty()) {
+            return DroneActivity.builder()
+                    .total(jobs.size())
+                    .jobs(jobs).build();
+        }
+        return null;
+    }
+
+    @Override
+    public DroneActivity getAll() {
+        List<DroneJob> jobs = jobsRepo
+                .findAll();
         if (!jobs.isEmpty()) {
             return DroneActivity.builder()
                     .total(jobs.size())

@@ -34,15 +34,15 @@ public class EventLogger {
     @Value("${history.events.logs.line-format}")
     private String line_format;
 
-    private DronesRepository dronesRepository;
     @Autowired
     private DroneAuditRepository droneAuditRepository;
+    private DronesRepository dronesRepository;
     @Autowired
     public EventLogger(DronesRepository dronesRepository) {
         this.dronesRepository = dronesRepository;
     }
 
-    @Scheduled(fixedRateString = "${history.events.logs.interval}")
+    @Scheduled(fixedRateString = "${history.events.logs.interval}", initialDelay = 1000 * 60 )
     public void logBatteryLevels() throws IOException {
         LocalDateTime localDateTime = LocalDateTime.now();
         String logfile = String.format(file_format, localDateTime);
@@ -63,7 +63,7 @@ public class EventLogger {
         }
         try (
                 BufferedWriter bufferedWriter =
-                        new BufferedWriter(new FileWriter(eventlogfile));
+                        new BufferedWriter(new FileWriter(eventlogfile))
                 ) {
             long i = 0;
             for (Drone drone : drones) {

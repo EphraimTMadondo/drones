@@ -1,0 +1,601 @@
+{
+	"info": {
+		"_postman_id": "89a01cf3-0bdb-4f6c-8773-1e3b74c2b9ee",
+		"name": "Drones Api",
+		"description": "Musala Drones Project API Docs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/drones/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"all"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Drones",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drones/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"all"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:41:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"total\": 10,\n    \"drones\": [\n        {\n            \"serialNumber\": \"2P3bP7Xr\",\n            \"droneModel\": \"Lightweight\",\n            \"maximum_weight\": 200,\n            \"batteryLife\": 100,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"7SfJ5Wx4\",\n            \"droneModel\": \"Lightweight\",\n            \"maximum_weight\": 500,\n            \"batteryLife\": 100,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 100\n        },\n        {\n            \"serialNumber\": \"2aTJNVin\",\n            \"droneModel\": \"Middleweight\",\n            \"maximum_weight\": 400,\n            \"batteryLife\": 80,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"8swrEBa7\",\n            \"droneModel\": \"Middleweight\",\n            \"maximum_weight\": 400,\n            \"batteryLife\": 80,\n            \"droneState\": \"LOADED\",\n            \"loadedWeight\": 350\n        },\n        {\n            \"serialNumber\": \"2n2Gcso9\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"A5Zz7P2n\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"LOADING\",\n            \"loadedWeight\": 100\n        },\n        {\n            \"serialNumber\": \"Ae2b9GVp\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"LOADED\",\n            \"loadedWeight\": 500\n        },\n        {\n            \"serialNumber\": \"BFpNs7pJ\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"DELIVERING\",\n            \"loadedWeight\": 500\n        },\n        {\n            \"serialNumber\": \"2p4SL3xY\",\n            \"droneModel\": \"Heavyweight\",\n            \"maximum_weight\": 800,\n            \"batteryLife\": 40,\n            \"droneState\": \"DELIVERING\",\n            \"loadedWeight\": 700\n        },\n        {\n            \"serialNumber\": \"5LMnV6Hi\",\n            \"droneModel\": \"Heavyweight\",\n            \"maximum_weight\": 800,\n            \"batteryLife\": 30,\n            \"droneState\": \"DELIVERED\",\n            \"loadedWeight\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"serialNumber\": \"7SfJ5Wx4\",\n  \"droneModel\": \"Lightweight\",\n  \"maximum_weight\": 500,\n  \"batteryLife\": 100,\n  \"droneState\": \"IDLE\",\n  \"loadedWeight\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/drones/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register Drone",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"serialNumber\": \"7SfJ5Wx4\",\n  \"droneModel\": \"Lightweight\",\n  \"maximum_weight\": 500,\n  \"batteryLife\": 100,\n  \"droneState\": \"IDLE\",\n  \"loadedWeight\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/drones/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:41:05 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"serialNumber\": \"7SfJ5Wx4\",\n    \"droneModel\": \"Lightweight\",\n    \"maximum_weight\": 500,\n    \"batteryLife\": 100,\n    \"droneState\": \"IDLE\",\n    \"loadedWeight\": 100\n}"
+				}
+			]
+		},
+		{
+			"name": "Check Battery Level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/drones/check-battery/2P3bP7Xr",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"check-battery",
+						"2P3bP7Xr"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Check Battery Level",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/drones/check-battery/2P3bP7Xr",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"check-battery",
+								"2P3bP7Xr"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:40:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"serialNumber\": \"2P3bP7Xr\",\n    \"model\": \"Lightweight\",\n    \"batteryLife\": 100\n}"
+				}
+			]
+		},
+		{
+			"name": "Available Drones",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Available Drones",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drones/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"all"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:40:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"total\": 10,\n    \"drones\": [\n        {\n            \"serialNumber\": \"2P3bP7Xr\",\n            \"droneModel\": \"Lightweight\",\n            \"maximum_weight\": 200,\n            \"batteryLife\": 100,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"7SfJ5Wx4\",\n            \"droneModel\": \"Lightweight\",\n            \"maximum_weight\": 200,\n            \"batteryLife\": 100,\n            \"droneState\": \"LOADING\",\n            \"loadedWeight\": 100\n        },\n        {\n            \"serialNumber\": \"2aTJNVin\",\n            \"droneModel\": \"Middleweight\",\n            \"maximum_weight\": 400,\n            \"batteryLife\": 80,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"8swrEBa7\",\n            \"droneModel\": \"Middleweight\",\n            \"maximum_weight\": 400,\n            \"batteryLife\": 80,\n            \"droneState\": \"LOADED\",\n            \"loadedWeight\": 350\n        },\n        {\n            \"serialNumber\": \"2n2Gcso9\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"IDLE\",\n            \"loadedWeight\": 0\n        },\n        {\n            \"serialNumber\": \"A5Zz7P2n\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"LOADING\",\n            \"loadedWeight\": 100\n        },\n        {\n            \"serialNumber\": \"Ae2b9GVp\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"LOADED\",\n            \"loadedWeight\": 500\n        },\n        {\n            \"serialNumber\": \"BFpNs7pJ\",\n            \"droneModel\": \"Cruiserweight\",\n            \"maximum_weight\": 600,\n            \"batteryLife\": 60,\n            \"droneState\": \"DELIVERING\",\n            \"loadedWeight\": 500\n        },\n        {\n            \"serialNumber\": \"2p4SL3xY\",\n            \"droneModel\": \"Heavyweight\",\n            \"maximum_weight\": 800,\n            \"batteryLife\": 40,\n            \"droneState\": \"DELIVERING\",\n            \"loadedWeight\": 700\n        },\n        {\n            \"serialNumber\": \"5LMnV6Hi\",\n            \"droneModel\": \"Heavyweight\",\n            \"maximum_weight\": 800,\n            \"batteryLife\": 30,\n            \"droneState\": \"DELIVERED\",\n            \"loadedWeight\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Activity Load",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"serialNumber\": \"string\",\n  \"state\": \"IDLE\",\n  \"packages\": [\n    {\n      \"id\": 0,\n      \"name\": \"Saferon\",\n      \"weight\": 100,\n      \"code\": \" JL9GGPGC/B2WY2 CRUJTTW1WG5/2 TVPGWO_EYN036BS-BALI2Y/2EB4J1_NIM1WJ/YNGY 4RHU/4P77 914/\",\n      \"image\": \"string\"\n    }\n  ],\n  \"quantity\": 2,\n  \"weightLoaded\": 200,\n  \"address\": \"Harare Gardens\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/drones/activity/load",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"activity",
+						"load"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Activity Load",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"serialNumber\": \"7SfJ5Wx4\",\n  \"quantity\": 0,\n  \"totalWeight\": 50,\n  \"deliveryAddress\": \"Harare Gardens\",\n  \"medications\": [\n    {\n      \"name\": \"Pain Killers\",\n      \"weight\": 50,\n      \"code\": \"VBQCZWDRJ95WD\",\n      \"image\": \"string\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/drones/activity/load",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"activity",
+								"load"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:40:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": \"7SfJ5Wx4\",\n    \"status\": \"OK\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check Activity",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Check Activity",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/drones/activity/check/7SfJ5Wx4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"activity",
+								"check",
+								"7SfJ5Wx4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:40:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"total\": 1,\n    \"jobs\": [\n        {\n            \"serialNumber\": \"7SfJ5Wx4\",\n            \"packages\": [\n                {\n                    \"name\": \"Pain Killers\",\n                    \"weight\": 50,\n                    \"code\": \"VBQCZWDRJ95WD\",\n                    \"image\": \"string\"\n                }\n            ],\n            \"quantity\": 0,\n            \"weightLoaded\": 50,\n            \"address\": \"Harare Gardens\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Drone Event Logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/drones/logs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"logs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Drone Event Logs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drones/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"logs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:37:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"total\": 1,\n    \"history\": [\n        {\n            \"id\": 1,\n            \"filepath\": \"2023-01-20T18:37:37.293280341.log\",\n            \"dateTime\": \"2023-01-20T18:37:37.29328\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Download Event Log",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/drones/logs/download/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"logs",
+						"download",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Event Log",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drones/logs/download/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drones",
+								"logs",
+								"download",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "raw",
+					"header": [
+						{
+							"key": "Content-Disposition",
+							"value": "attachment; filename=\"2023-01-20T18:37:37.293280341.log\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/txt"
+						},
+						{
+							"key": "Content-Length",
+							"value": "409"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Jan 2023 16:38:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "00000 2P3bP7Xr Lightweight IDLE: 100%\n00001 7SfJ5Wx4 Lightweight LOADING: 100%\n00002 2aTJNVin Middleweight IDLE: 80%\n00003 8swrEBa7 Middleweight LOADED: 80%\n00004 2n2Gcso9 Cruiserweight IDLE: 60%\n00005 A5Zz7P2n Cruiserweight LOADING: 60%\n00006 Ae2b9GVp Cruiserweight LOADED: 60%\n00007 BFpNs7pJ Cruiserweight DELIVERING: 60%\n00008 2p4SL3xY Heavyweight DELIVERING: 40%\n00009 5LMnV6Hi Heavyweight DELIVERED: 30%\n"
+				}
+			]
+		}
+	]
+}
