@@ -15,7 +15,7 @@ public class AppConfig {
 
         return new OpenAPI()
                 .info(new Info()
-                        .title("Musala - Drone Project APIs")
+                        .title("Drone Project APIs")
                         .version(appVersion)
                         .description(appDesciption)
                         .termsOfService("http://swagger.io/terms/")
