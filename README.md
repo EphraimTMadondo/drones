@@ -25,10 +25,22 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
+1. Clone the repository - alternatively you can log in to GitHub and Download Zip file
 ```shell
 git clone https://github.com/EphraimTMadondo/drones.git
 cd drones
-mvn spring-boot:run
+```
+2. Update Application Properties
+```properties
+#Data config- H2 database
+spring.datasource.url=jdbc:h2:mem:testdb
+
+#Base directory where event logs will be created ending with /
+history.events.logs.base-directory=[path to you directory path]
+```
+3.Run
+```shell
+./mvnw clean install
 ```
 
 ### Default Browser URL
