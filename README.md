@@ -47,7 +47,7 @@ history.events.logs.base-directory=[path to you directory path]
 http://localhost:8080
 
 ### API Documentation
-http://localhost:8080/docs.html
+http://localhost:8080
 
 
 
